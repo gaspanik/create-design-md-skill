@@ -169,10 +169,10 @@ components:
 
 ## Step 4: Lint validation
 
-After generating the file, run the linter:
+After generating the file, run the linter. Replace `<pm>` with the package manager used in this project (`npx`, `pnpm dlx`, `yarn dlx`, etc.):
 
 ```bash
-pnpm dlx @google/design.md lint DESIGN.md
+<pm> @google/design.md lint DESIGN.md
 ```
 
 Review the results:

@@ -1,5 +1,7 @@
 # create-design-md — DESIGN.md Generator Skill
 
+> **Experimental:** This skill is a work in progress. Behavior may change as the [Google design.md specification](https://github.com/google-labs-code/design.md) evolves.
+
 A Claude Code skill that generates a `DESIGN.md` file in the project root following the [Google design.md specification](https://github.com/google-labs-code/design.md). Supports three source modes — codebase exploration, Figma URL, or an existing DESIGN.md URL — and validates the output with the design.md linter.
 
 ---
@@ -70,6 +72,14 @@ Invoke with a slash command or natural language — both work:
 
 ```
 Generate a DESIGN.md from the current codebase.
+```
+
+```
+このコードベースから DESIGN.md を作って
+```
+
+```
+このFigmaのURLから DESIGN.md 作って: https://www.figma.com/design/...
 ```
 
 If no argument is provided, the skill asks you to choose a source mode interactively.
