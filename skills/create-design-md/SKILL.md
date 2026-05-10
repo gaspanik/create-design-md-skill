@@ -13,7 +13,14 @@ Generate a `DESIGN.md` file in the project root following the [Google design.md 
 
 ## Step 1: Determine the source
 
-Evaluate `$ARGUMENTS` using the following rules:
+First, check whether `DESIGN.md` already exists in the project root. If it does, ask the user with AskUserQuestion before proceeding:
+
+- **Update it** — Regenerate `DESIGN.md` from a source of their choice (overwrites the existing file)
+- **Keep it** — Abort and leave the existing file as-is
+
+If the user chooses to keep it, stop here and report that the existing `DESIGN.md` was left unchanged.
+
+If the user chooses to update (or if no `DESIGN.md` exists), evaluate `$ARGUMENTS` using the following rules:
 
 - URL containing `figma.com` → **Figma mode**
 - URL ending in `.md`, or containing `raw.githubusercontent.com` / `github.com` → **DESIGN.md URL mode**
