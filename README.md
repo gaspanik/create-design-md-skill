@@ -90,6 +90,7 @@ The report is written in whatever language you are using in the conversation —
 
 ## Tips
 
+- **Audit your Figma file before running in Figma mode.** The quality of the generated `DESIGN.md` depends directly on how well the Figma file is structured. Before running this skill, use [figma-audit-skill](https://github.com/gaspanik/figma-audit-skill) to check frame-level AI-readiness (layer naming, auto-layout, variables, component structure), and [figma-component-audit-skill](https://github.com/gaspanik/figma-component-audit-skill) to audit component and variant structure. Fixing issues flagged by those skills — especially undefined Variables — leads to significantly better token coverage in the output.
 - **Figma mode works best with Variables defined.** Files with color, typography, and spacing Variables produce richer token output. The more structured the Figma file, the better the `DESIGN.md`.
 - **After generating, Claude reads it automatically.** Add the following to your `CLAUDE.md` so Claude consults `DESIGN.md` before any UI implementation:
 
