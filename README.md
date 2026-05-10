@@ -108,7 +108,7 @@ The report is written in whatever language you are using in the conversation —
 
 ## Agent settings
 
-- The skill requires `pnpm` to run the linter (`pnpm dlx @google/design.md lint`). If your project uses a different package manager, run the linter manually: `npx @google/design.md lint DESIGN.md`.
+- The linter is invoked automatically using the package manager detected in the project (`npx`, `pnpm dlx`, `yarn dlx`, etc.).
 - Figma mode requires the official [Figma MCP server](https://github.com/figma/mcp-server-guide) to be connected in Claude Code settings.
 
 ---
