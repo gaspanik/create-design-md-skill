@@ -131,6 +131,7 @@ components:
 - **lineHeight**: number or Dimension (e.g. `1.6` or `24px`)
 - `colors.primary` is required — omitting it triggers a `missing-primary` warning
 - Ensure WCAG AA contrast ratio (4.5:1) for `backgroundColor` / `textColor` pairs in components
+- **Component completeness**: `button-*` components that define `backgroundColor` must also define `padding`; omitting `padding` leaves button height undefined in previews
 
 ### Markdown body (section order is fixed)
 
