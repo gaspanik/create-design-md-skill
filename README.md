@@ -2,7 +2,7 @@
 
 > **Experimental:** This skill is a work in progress. Behavior may change as the [Google design.md specification](https://github.com/google-labs-code/design.md) evolves.
 
-A Claude Code skill that generates a `DESIGN.md` file in the project root following the [Google design.md specification](https://github.com/google-labs-code/design.md). Supports three source modes — codebase exploration, Figma URL, or an existing DESIGN.md URL — and validates the output with the design.md linter.
+A Claude Code skill that generates a `DESIGN.md` file in the project root following the [Google design.md specification](https://github.com/google-labs-code/design.md). Supports four source modes — codebase exploration, Figma URL, existing DESIGN.md URL, or pasted design spec content — and validates the output with the design.md linter.
 
 ---
 
@@ -13,18 +13,19 @@ A Claude Code skill that generates a `DESIGN.md` file in the project root follow
 This skill automates the creation of that file. Point it at your codebase, a Figma design, or an existing `DESIGN.md` from another project, and it generates a spec-compliant file, then runs the linter to catch any issues automatically.
 
 ```
-Codebase / Figma URL / DESIGN.md URL  →  create-design-md  →  DESIGN.md (lint-validated)
+Codebase / Figma URL / DESIGN.md URL / Paste  →  create-design-md  →  DESIGN.md (lint-validated)
 ```
 
 ---
 
-## The 3 source modes
+## The 4 source modes
 
 | Mode | When to use |
 |------|-------------|
 | **Explore codebase** | The project already has CSS tokens (`@theme` block) and components you want to document |
 | **Figma URL** | You have a Figma design file with Variables defined |
 | **Existing DESIGN.md URL** | You want to adopt a published `DESIGN.md` from another project (e.g. a GitHub raw URL) |
+| **Paste** | The source URL requires authentication or triggers a direct download — paste the content directly into the conversation |
 
 ---
 
