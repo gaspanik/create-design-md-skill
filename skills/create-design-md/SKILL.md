@@ -191,6 +191,12 @@ components:
 
 **Note:** Sections with insufficient information may be omitted, but any included sections must follow the order above.
 
+### Internal consistency rules
+
+- **Components / Do's and Don'ts must not contradict each other or the frontmatter.** Before finishing, re-read the body against the frontmatter tokens and the Don'ts list
+- When showing example classes in Components, reference the defined tokens — hex values or token-based class names (e.g. `bg-primary` assuming `--color-primary`) — **not Tailwind default palette classes** like `bg-neutral-700`. This is especially important if a Don't forbids using `neutral-*` / `gray-*` directly
+- Values mentioned in the body (max-width, padding, font sizes, radius) must match the frontmatter tokens
+
 ## Step 4: Lint validation
 
 After generating the file, run the linter. Replace `<pm>` with the package manager used in this project (`npx`, `pnpm dlx`, `yarn dlx`, etc.):
