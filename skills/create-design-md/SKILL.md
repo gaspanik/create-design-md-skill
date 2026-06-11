@@ -236,3 +236,5 @@ Report the following:
 - Path to the generated `DESIGN.md`
 - Lint result summary (number of errors / warnings / info)
 - Overview of key design tokens (colors, typography)
+
+**In orchestrated runs** (invoked from setup-project or another pipeline): keep this report to 1–2 lines and continue immediately with the orchestrator's next step in the same response — do not end the turn here.
