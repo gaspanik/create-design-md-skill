@@ -76,6 +76,11 @@ Collect:
 - Component style patterns (buttons, etc.)
 - Overall design mood and tone
 
+**When the codebase yields no meaningful palette** (e.g. a fresh starter whose `@theme` has only font tokens):
+
+- If an orchestrator brief includes a **color preference**, use it as the basis for the palette
+- Otherwise, ask the user with `AskUserQuestion` before inventing colors — options like "Leave it to me", "Monochrome + accent", "Light & colorful", "Dark tone" (Other accepts brand hex values). Do not silently decide the palette on the user's behalf
+
 ### Figma mode
 
 Extract `fileKey` and `nodeId` from the Figma URL (convert `node-id=1-2` → `1:2`).
@@ -101,7 +106,9 @@ description: <one-line project description>
 colors:
   primary: "#XXXXXX"
   secondary: "#XXXXXX"
-  # add tertiary, neutral, surface, etc. as needed
+  surface: "#XXXXXX"
+  border: "#XXXXXX"
+  # add tertiary, neutral, muted, surface-alt, etc. as needed
 typography:
   h1:
     fontFamily: <font name>
@@ -146,6 +153,7 @@ components:
 - **fontWeight**: number (e.g. `400`, `700`)
 - **lineHeight**: number or Dimension (e.g. `1.6` or `24px`)
 - `colors.primary` is required — omitting it triggers a `missing-primary` warning
+- **Utility colors are part of the spec**: real pages always need a `border` color (dividers, outlines, card borders), and designs with tinted sections or placeholder blocks need a subtle background variant (e.g. `surface-alt`). Define these in the `colors` frontmatter — **never in prose only**. Downstream pipeline steps (tailwind-typescale, create-mockup) read tokens from the frontmatter; a color mentioned only in the body is invisible to them
 - Ensure WCAG AA contrast ratio (4.5:1) for `backgroundColor` / `textColor` pairs in components
 - **Component completeness**: `button-*` components that define `backgroundColor` must also define `padding`; omitting `padding` leaves button height undefined in previews
 
@@ -210,6 +218,8 @@ Review the results:
 - **error** → fix `DESIGN.md` and re-run the linter (repeat until no errors remain)
 - **warning** → review and fix where possible (contrast ratio issues, orphaned tokens, etc.)
 - **info** → no action needed
+
+> **⚠️ Never fix an orphaned-token warning by deleting a utility color** (`border`, `surface-alt`, `muted`, etc.) from the frontmatter. Instead, reference it from a component (e.g. `button-outline.borderColor: "{colors.border}"`) or leave the warning as-is. Moving the definition into prose breaks the downstream pipeline, which reads colors from the frontmatter only.
 
 ### Common lint errors and fixes
 
