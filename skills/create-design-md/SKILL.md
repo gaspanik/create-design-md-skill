@@ -141,6 +141,12 @@ components:
     padding: <px>
   button-primary-hover:
     backgroundColor: "{colors.secondary}"
+  button-outline:
+    backgroundColor: "{colors.surface}"  # concrete color, never `transparent` (see lint notes)
+    textColor: "{colors.primary}"
+    borderColor: "{colors.border}"       # keeps `colors.border` from being flagged as orphaned
+    rounded: "{rounded.md}"
+    padding: <px>
   # add other components as needed
 ---
 ```
@@ -154,6 +160,7 @@ components:
 - **lineHeight**: number or Dimension (e.g. `1.6` or `24px`)
 - `colors.primary` is required — omitting it triggers a `missing-primary` warning
 - **Utility colors are part of the spec**: real pages always need a `border` color (dividers, outlines, card borders), and designs with tinted sections or placeholder blocks need a subtle background variant (e.g. `surface-alt`). Define these in the `colors` frontmatter — **never in prose only**. Downstream pipeline steps (tailwind-typescale, create-mockup) read tokens from the frontmatter; a color mentioned only in the body is invisible to them
+- **Reference every custom color from at least one component.** The linter's orphaned-token check exempts only the MD3 standard families (`primary`, `secondary`, `tertiary`, `error`, `surface`, `background`, `outline`); every other color name (`accent`, `muted`, `border`, `surface-alt`, …) gets flagged unless a component references it. Components accept arbitrary property names, so wire them up like `button-outline.borderColor: "{colors.border}"`, `caption.textColor: "{colors.muted}"`
 - Ensure WCAG AA contrast ratio (4.5:1) for `backgroundColor` / `textColor` pairs in components
 - **Component completeness**: `button-*` components that define `backgroundColor` must also define `padding`; omitting `padding` leaves button height undefined in previews
 
@@ -219,7 +226,9 @@ Review the results:
 - **warning** → review and fix where possible (contrast ratio issues, orphaned tokens, etc.)
 - **info** → no action needed
 
-> **⚠️ Never fix an orphaned-token warning by deleting a utility color** (`border`, `surface-alt`, `muted`, etc.) from the frontmatter. Instead, reference it from a component (e.g. `button-outline.borderColor: "{colors.border}"`) or leave the warning as-is. Moving the definition into prose breaks the downstream pipeline, which reads colors from the frontmatter only.
+> **⚠️ Never fix an orphaned-token warning by deleting a utility color** (`border`, `surface-alt`, `muted`, etc.) from the frontmatter. Instead, reference it from a component (e.g. `button-outline.borderColor: "{colors.border}"`) or leave the warning as-is. Moving the definition into prose breaks the downstream pipeline, which reads colors from the frontmatter only. (Only the MD3 standard families `primary` / `secondary` / `tertiary` / `error` / `surface` / `background` / `outline` are exempt from this check.)
+>
+> **⚠️ Never use `transparent` (or any alpha / non-opaque value) as a component `backgroundColor`.** The contrast-ratio rule converts colors to sRGB and computes textColor contrast against them, so `transparent` produces a bogus below-AA warning. For outline / ghost buttons, set `backgroundColor` to the concrete page surface color (e.g. `"{colors.surface}"`) instead. When fixing a contrast warning, substitute the concrete color — **never delete other tokens as part of the fix**.
 
 ### Common lint errors and fixes
 
