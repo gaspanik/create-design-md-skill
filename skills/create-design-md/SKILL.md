@@ -62,7 +62,7 @@ Then skip directly to **Step 4 (lint validation)** — Step 3 is not needed.
 
 Read the following files in order to gather design system information:
 
-1. **Find the main CSS file** — run `grep -rl --include="*.css" --exclude-dir=node_modules --exclude-dir=dist '@import ["'"'"']tailwindcss' . 2>/dev/null` to locate CSS files that import Tailwind. Read the first match (typically `src/index.css` or `src/app.css`). Extract color and spacing tokens from the `@theme` block.
+1. **Find the main CSS file** — search for CSS files containing `@import "tailwindcss"` or `@import 'tailwindcss'` across the project (excluding `node_modules`/`dist`). Read the first match (typically `src/index.css` or `src/app.css`) and extract color and spacing tokens from the `@theme` block.
 2. `src/components/` — review component files to understand style patterns (buttons, cards, etc.)
 3. `tailwind.config.*` or `vite.config.*` — check for additional configuration
 4. `package.json` — get the project name
