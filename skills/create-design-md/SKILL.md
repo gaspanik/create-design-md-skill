@@ -71,8 +71,8 @@ Then skip directly to **Step 4 (lint validation)** — Step 3 is not needed.
 
 Read the following files in order to gather design system information:
 
-1. **Find the main CSS file** — search for CSS files containing `@import "tailwindcss"` or `@import 'tailwindcss'` across the project (excluding `node_modules`/`dist`). Read the first match (typically `src/index.css` or `src/app.css`) and extract color and spacing tokens from the `@theme` block.
-2. `src/components/` — review component files to understand style patterns (buttons, cards, etc.)
+1. **Find the main CSS file** — search for CSS files containing `@import "tailwindcss"` or `@import 'tailwindcss'` across the project (excluding `node_modules`/`dist`). Read the first match (typically `src/index.css` or `src/app.css`) and extract color and spacing tokens from the `@theme` block. Font-family tokens (`--default-font-family`, `--heading-font-family`, etc.) also live here — but **do not read `fontWeight` from this file**. In Tailwind v4 projects, `@layer base` commonly sets `font-family`/`line-height` for headings without ever setting `font-weight`, since weight is applied per-instance via utility classes rather than globally.
+2. **Representative pages/components** (e.g. `src/pages/index.astro` or equivalent, key files under `src/components/`) — review for style patterns (buttons, cards, etc.) **and check the actual heading/body elements for Tailwind font-weight classes** (`font-thin` / `font-light` / `font-normal` / `font-medium` / `font-semibold` / `font-bold` / `font-extrabold` / `font-black`) or inline `font-weight` styles. This is the only reliable source for `typography.*.fontWeight` when the project uses Tailwind — never assume a conventional weight (e.g. "headings are bold") without confirming it against real markup. If a given level has no explicit weight class anywhere in the codebase, record the actual CSS default (`400`) rather than guessing a heavier one.
 3. `tailwind.config.*` or `vite.config.*` — check for additional configuration
 4. `package.json` — get the project name
 
